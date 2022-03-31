@@ -1,0 +1,104 @@
+﻿@using NucleoLoguin_API.Models
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model Projeto_NucleoLoguin.Models.ListaAutomoveis;
+@using (Html.BeginForm("salvar", "Home", FormMethod.Post))
+{
+<div class="row" style="border-radius: 10px; border: solid 2px black; margin: 20px;">
+    <div class="col-md-12" style="padding: 20px;">
+        <div style="font-weight: bold; font-size:32px; text-align: center;">POST</div>
+        <form>
+          <div class="mb-3">
+            <label for="inputName" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="ex: EcoSport" aria-describedby="labelName">
+            <div id="labelName" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+          <div class="mb-3">
+            <label for="inputFabricante" class="form-label">Fabricante</label>
+            <input type="text" class="form-control" id="inputFabricante" name="inputFabricante" placeholder="ex: Ford">
+          </div>
+          <div class="mb-3">
+            <label for="inputAno" class="form-label">Ano</label>
+            <input type="text" class="form-control" placeholder="ex: 1999" id="inputAno" name="inputAno">
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck" name="exampleCheck">
+            <label class="form-check-label" for="exampleCheck1">Eu sou o proprietário do veiculo</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+</div>
+}
+@using (Html.BeginForm("deletar", "Home", FormMethod.Post))
+{
+    <div class="row" style="border-radius: 10px; border: solid 2px black; margin: 20px;">
+        <div class="col-md-12" style="padding: 20px;">
+            <div style="font-weight: bold; font-size:32px; text-align: center;">DELETE</div>
+            <form>
+              <div class="mb-3">
+                <label for="inputIdDelete" class="form-label">ID</label>
+                <input type="text" class="form-control" id="inputIdDelete" name="inputIdDelete" aria-describedby="labelDelete">
+                <div id="labelDelete" class="form-text">Tenha certeza do que está excluindo.</div>
+              </div>
+              <button type="submit" class="btn btn-primary">Excluir</button>
+            </form>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("atualizar", "Home", FormMethod.Post))
+{
+    <div class="row" style="border-radius: 10px; border: solid 2px black; margin: 20px;">
+        <div class="col-md-12" style="padding: 20px;">
+            <div style="font-weight: bold; font-size:32px; text-align: center;">PUT</div>
+            <form>
+                <div class="mb-3">
+                <label for="inputIdUpdate" class="form-label">ID</label>
+                <input type="text" class="form-control" name="inputIdUpdate" id="inputIdUpdate" placeholder="ex: 1" aria-describedby="labelNameUpdate">
+                <div id="labelNameUpdate" class="form-text">Certifique-se do ID que está passando.</div>
+              </div>
+              <div class="mb-3">
+                <label for="inputNameUpdate" class="form-label">Nome</label>
+                <input type="text" name="inputNameUpdate" class="form-control" id="inputNameUpdate" placeholder="ex: EcoSport" aria-describedby="labelNameUpdate">
+              </div>
+              <div class="mb-3">
+                <label for="inputFabricanteUpdate" class="form-label">Fabricante</label>
+                <input type="text" name="inputFabricanteUpdate" class="form-control" id="inputFabricanteUpdate" placeholder="ex: Ford">
+              </div>
+              <div class="mb-3">
+                <label for="inputAnoUpdate" class="form-label">Ano</label>
+                <input type="text"  name="inputAnoUpdate" class="form-control" placeholder="ex: 1999" id="inputAnoUpdate">
+              </div>
+              <button type="submit" class="btn btn-primary">Atualizar</button>
+            </form>
+        </div>
+    </div>
+}
+<div>
+    @using (Html.BeginForm("listar", "Home", FormMethod.Post))
+    {
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Fabricante</th>
+              <th scope="col">Ano</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach(Automovel items in Model.automoveis)
+                    {    
+                        <tr>
+                          <th scope="row">@items.Id</th>
+                          <td>@items.Nome</td>
+                          <td>@items.NomeFabricante</td>
+                          <td>@items.Ano</td>
+                        </tr>
+                    }
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Listar</button>
+    }
+</div>
